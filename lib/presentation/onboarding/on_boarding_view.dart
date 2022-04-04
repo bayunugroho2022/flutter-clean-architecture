@@ -1,3 +1,5 @@
+import 'package:clean_architecture/app/app_prefs.dart';
+import 'package:clean_architecture/data/di.dart';
 import 'package:clean_architecture/domain/model/model.dart';
 import 'package:clean_architecture/presentation/onboarding/on_boarding_viewmodel.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
@@ -5,7 +7,6 @@ import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/routes_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/value_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,8 +22,10 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   PageController _pageController = PageController(initialPage: 0);
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   _bind(){
+    _appPreferences.setOnBoardingScreenViewed();
     _viewModel.start();
   }
 
