@@ -79,7 +79,7 @@ extension FlowStateExtension on FlowState {
             // return the content ui of the screen
             return contentScreenWidget;
           } else // StateRendererType.FULL_SCREEN_LOADING_STATE
-          {
+              {
             return StateRenderer(
                 stateRendererType: getStateRendererType(),
                 message: getMessage(),
@@ -95,7 +95,7 @@ extension FlowStateExtension on FlowState {
             // return the content ui of the screen
             return contentScreenWidget;
           } else // StateRendererType.FULL_SCREEN_ERROR_STATE
-          {
+              {
             return StateRenderer(
                 stateRendererType: getStateRendererType(),
                 message: getMessage(),
@@ -135,9 +135,9 @@ extension FlowStateExtension on FlowState {
     WidgetsBinding.instance?.addPostFrameCallback((_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(
-              stateRendererType: stateRendererType,
-              message: message,
-              retryActionFunction: () {},
-            )));
+          stateRendererType: stateRendererType,
+          message: message,
+          retryActionFunction: () {},
+        )));
   }
 }

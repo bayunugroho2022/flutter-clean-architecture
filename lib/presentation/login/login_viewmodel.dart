@@ -28,7 +28,6 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void start() {
-    //view tells state renderer, please how the content of the screen
     inputState.add(ContentState());
   }
 
@@ -40,19 +39,24 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
-    inputState.add(LoadingState(
-        stateRendererType: StateRendererType.POPUP_LOADING_STATE));
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _loginUseCase.execute(
-            LoginUseCaseInput(loginObject.userName, loginObject.password)))
+        LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold(
-            (failure) => {
-                  inputState.add(ErrorState(
-                      StateRendererType.POPUP_ERROR_STATE,
-                      failure.message))
-                },
-            (data)  {
-              print('sukses');
-            });
+            (failure)
+        {
+          // left -> failure
+          inputState.add(ErrorState(
+              StateRendererType.POPUP_ERROR_STATE, failure.message));
+    },
+            (data) {
+          // right -> success (data)
+          inputState.add(ContentState());
+
+          // navigate to main screen after the login
+          isUserLoggedInSuccessfully.add(true);
+        });
   }
 
   @override
@@ -95,13 +99,10 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  // TODO: implement inputIsAllInputValid
   Sink get inputIsAllInputValid => _isAllInputsValidStreamController.sink;
 
   @override
-  // TODO: implement outputIsAllInputsValid
-  Stream<bool> get outputIsAllInputsValid =>
-      _isAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
+  Stream<bool> get outputIsAllInputsValid => _isAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
 }
 
 abstract class LoginViewModelInput {
