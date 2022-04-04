@@ -1,5 +1,6 @@
 
 import 'package:clean_architecture/app/extentions.dart';
+import 'package:clean_architecture/data/responses/response_forgot_password.dart';
 import 'package:clean_architecture/data/responses/response_login.dart';
 import 'package:clean_architecture/domain/model/model.dart';
 
@@ -13,6 +14,12 @@ extension CustomerResponseMapper on Customer{
       this.name?.orEmpty() ?? EMPTY,
       this.numOfNotifications?.orZero() ?? ZERO,
     );
+  }
+}
+
+extension ResponseForgotPasswordMapper on ResponseForgotPassword{
+  String toDomain(){
+    return support?.orEmpty() ?? EMPTY;
   }
 }
 

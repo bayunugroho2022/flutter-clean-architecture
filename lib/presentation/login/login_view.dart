@@ -22,8 +22,8 @@ class _LoginViewState extends State<LoginView> {
   final LoginViewModel _viewModel = instance<LoginViewModel>();
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
-  TextEditingController _userNameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   _bind() {
@@ -68,16 +68,16 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _getContentWidget() {
     return Container(
-        padding: EdgeInsets.only(top: AppPadding.p100),
+        padding: const EdgeInsets.only(top: AppPadding.p100),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                Image(image: AssetImage(ImageAssets.splashLogo)),
-                SizedBox(height: AppSize.s28),
+                const Image(image: AssetImage(ImageAssets.splashLogo)),
+                const SizedBox(height: AppSize.s28),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: AppPadding.p28, right: AppPadding.p28),
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outputIsUserNameValid,
@@ -95,9 +95,9 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                 ),
-                SizedBox(height: AppSize.s28),
+                const SizedBox(height: AppSize.s28),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: AppPadding.p28, right: AppPadding.p28),
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outputIsPasswordValid,
@@ -115,9 +115,9 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                 ),
-                SizedBox(height: AppSize.s28),
+                const SizedBox(height: AppSize.s28),
                 Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: AppPadding.p28, right: AppPadding.p28),
                     child: StreamBuilder<bool>(
                       stream: _viewModel.outputIsAllInputsValid,
@@ -131,12 +131,12 @@ class _LoginViewState extends State<LoginView> {
                                 _viewModel.login();
                               }
                                   : null,
-                              child: Text(AppStrings.login)),
+                              child: const Text(AppStrings.login)),
                         );
                       },
                     )),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: AppPadding.p8,
                     left: AppPadding.p28,
                     right: AppPadding.p28,
@@ -146,7 +146,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamed(
                               context, Routes.forgotPasswordRoute);
                         },
                         child: Text(AppStrings.forgetPassword,
@@ -154,7 +154,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamed(
                               context, Routes.registerRoute);
                         },
                         child: Text(AppStrings.registerText,

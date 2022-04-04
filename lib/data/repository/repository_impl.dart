@@ -19,17 +19,12 @@ class RepositoryImpl extends Repository {
       LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
       try {
-        // its safe to call the API
         final response = await _remoteDataSource.login(loginRequest);
 
         if (response.status == ApiInternalStatus.SUCCESS) // success
-            {
-          // return data (success)
-          // return right
+        {
           return Right(response.toDomain());
         } else {
-          // return biz logic error
-          // return left
           return Left(Failure(response.status ?? ApiInternalStatus.FAILURE,
               response.message ?? ResponseMessage.DEFAULT));
         }
@@ -37,7 +32,27 @@ class RepositoryImpl extends Repository {
         return (Left(ErrorHandler.handle(error).failure));
       }
     } else {
-      // return connection error
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> forgotPassword(String email) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.forgotPassword(email);
+
+        if (response.status == ApiInternalStatus.SUCCESS) // success
+        {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(response.status ?? ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return (Left(ErrorHandler.handle(error).failure));
+      }
+    } else {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
