@@ -28,8 +28,8 @@ class ForgotPasswordViewModel extends BaseViewModel
     (await _forgotPasswordUseCase.execute(email)).fold((failure) {
       inputState.add(
           ErrorState(StateRendererType.POPUP_ERROR_STATE, failure.message));
-    }, (authObject) {
-      inputState.add(ContentState());
+    }, (supportMessage) {
+      inputState.add(SuccessState(supportMessage));
     });
   }
 
@@ -44,16 +44,13 @@ class ForgotPasswordViewModel extends BaseViewModel
   Sink get inputEmail => _emailStreamController.sink;
 
   @override
-  // TODO: implement inputIsAllInputValid
   Sink get inputIsAllInputValid => _isAllInputValidStreamController.sink;
 
   @override
-  // TODO: implement outputIsAllInputValid
   Stream<bool> get outputIsAllInputValid => _isAllInputValidStreamController.stream
           .map((isAllInputValid) => _isAllInputValid());
 
   @override
-  // TODO: implement outputIsEmailValid
   Stream<bool> get outputIsEmailValid => _emailStreamController.stream.map((email) => isEmailValid(email));
 
   @override

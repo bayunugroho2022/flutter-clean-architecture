@@ -12,7 +12,7 @@ import 'package:lottie/lottie.dart';
 enum StateRendererType {
   POPUP_LOADING_STATE,
   POPUP_ERROR_STATE,
-
+  POPUP_SUCCESS,
   FULL_SCREEN_LOADING_STATE,
   FULL_SCREEN_ERROR_STATE,
   CONTENT_SCREEN_STATE,
@@ -28,11 +28,11 @@ class StateRenderer extends StatelessWidget {
 
   StateRenderer(
       {Key? key,
-        required this.stateRendererType,
-        Failure? failure,
-        String? message,
-        String? title,
-        required this.retryActionFunction})
+      required this.stateRendererType,
+      Failure? failure,
+      String? message,
+      String? title,
+      required this.retryActionFunction})
       : message = message ?? AppStrings.loading,
         title = title ?? EMPTY,
         failure = failure ?? DefaultFailure(),
@@ -62,6 +62,13 @@ class StateRenderer extends StatelessWidget {
           _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
           _getRetryButton(AppStrings.retryAgain, context)
+        ]);
+      case StateRendererType.POPUP_SUCCESS:
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(JsonAssets.success),
+          _getMessage(title),
+          _getMessage(message),
+          _getRetryButton(AppStrings.ok, context)
         ]);
       case StateRendererType.CONTENT_SCREEN_STATE:
         return Container();
@@ -119,7 +126,7 @@ class StateRenderer extends StatelessWidget {
         child: Text(
           message,
           style:
-          getMediumStyle(color: ColorManager.black, fontSize: FontSize.s16),
+              getMediumStyle(color: ColorManager.black, fontSize: FontSize.s16),
         ),
       ),
     );

@@ -9,8 +9,8 @@ import 'package:clean_architecture/data/mapper/mapper.dart';
 import 'package:dartz/dartz.dart';
 
 class RepositoryImpl extends Repository {
-  RemoteDataSource _remoteDataSource;
-  NetworkInfo _networkInfo;
+  final RemoteDataSource _remoteDataSource;
+  final NetworkInfo _networkInfo;
 
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
 
@@ -41,7 +41,6 @@ class RepositoryImpl extends Repository {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _remoteDataSource.forgotPassword(email);
-
         if (response.status == ApiInternalStatus.SUCCESS) // success
         {
           return Right(response.toDomain());
