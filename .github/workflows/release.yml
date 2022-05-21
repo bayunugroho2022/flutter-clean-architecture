@@ -34,8 +34,8 @@ jobs:
 #        with:
 #          artifacts: "build/app/outputs/flutter-apk/*.apk"
 #          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Send Messages To Telegram
-        uses: glahajeekn/send-meagess-to-telegram@v1.0
+      - name: send default message ${{ secrets.TELEGRAM_ID }} ${{ secrets.TELEGRAM_TOKEN }}
+        uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
