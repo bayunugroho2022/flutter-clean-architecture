@@ -41,7 +41,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message:  ${{ github.actor }} created commit
 #          document: app/build/outputs/apk/debug/app-debug.apk
-          document: build/app/outputs/flutter-apk/app-debug.apk
+          document: assets/json/error.json
 #          photo: assets/images/splash_logo.png
 
 
