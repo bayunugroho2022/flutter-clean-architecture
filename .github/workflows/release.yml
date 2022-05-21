@@ -35,7 +35,7 @@ jobs:
 #          artifacts: "build/app/outputs/flutter-apk/*.apk"
 #          token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          echo "${{ secrets.TELEGRAM_ID }}"
+          echo " sdadasdas ${{ secrets.TELEGRAM_ID }}"
       - name: send default message
         uses: appleboy/telegram-action@master
         with:
