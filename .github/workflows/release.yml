@@ -19,36 +19,33 @@ jobs:
       JAVA_VERSION: "11.0"
       FLUTTER_VERSION: "2.10.5"
     steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-java@v1
-#        with:
-#          java-version: ${{env.JAVA_VERSION}}
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: ${{env.FLUTTER_VERSION}}
-#      - run: flutter pub get
-##      - run: flutter analyze
-##      - run: flutter test
-#      - run: flutter build apk --release
-#      - uses: ncipollo/release-action@v1
-#        with:
-#          artifacts: "build/app/outputs/flutter-apk/*.apk"
-#          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: ${{env.JAVA_VERSION}}
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+      - run: flutter pub get
+#      - run: flutter analyze
+#      - run: flutter test
+      - run: flutter build apk --debug
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: send default message
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-#          message: |
-#            ${{ github.actor }} created commit
-#
-#            Repository: ${{ github.repository }}
-#            Workspace: ${{ github.workspace }}
-
-#            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          photo: "./assets/images/splash_logo.png"
-          document: "./assets/images/splash_logo.png"
           message: |
-            Below is the apk for commit: ${{ github.event.head_commit.message }}
+            ${{ github.actor }} created commit
+
+            Repository: ${{ github.repository }}
+            Workspace: ${{ github.workspace }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+          document: app/build/outputs/apk/debug/app-debug.apk
 
 
