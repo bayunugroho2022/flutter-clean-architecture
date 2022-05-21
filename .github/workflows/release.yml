@@ -45,7 +45,7 @@ jobs:
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          photo: assets/images/splash_logo.png
+          photo: ${{ github.workspace }}/assets/images/splash_logo.png
           document: ${{ github.workspace }}/assets/images/splash_logo.png
 
 
