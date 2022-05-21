@@ -34,21 +34,16 @@ jobs:
 #        with:
 #          artifacts: "build/app/outputs/flutter-apk/*.apk"
 #          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: logs
-        run: |
-          echo "The GitHub Action Secret will be masked:  "
-          echo ${{ secrets.TELEGRAM_TO }}
-          echo "Trick to echo GitHub Actions Secret:  "
-          echo ${{secrets.TELEGRAM_TO}} | sed 's/./& /g'
       - name: send default message
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            ${{ github.actor }} created commit
 
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+            document: assets/success.json
