@@ -46,7 +46,7 @@ jobs:
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 #          document: app/build/outputs/apk/debug/app-debug.apk
-          document: assets/fonts/Montserrat-Light.ttf
           photo: assets/images/splash_logo.png
+          document: assets/images/splash_logo.png
 
 
