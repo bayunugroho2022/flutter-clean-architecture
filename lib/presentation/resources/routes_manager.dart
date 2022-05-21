@@ -1,4 +1,4 @@
-import 'package:clean_architecture/data/di.dart';
+import 'package:clean_architecture/data/locator.dart';
 import 'package:clean_architecture/presentation/forgot_password/forgot_password_view.dart';
 import 'package:clean_architecture/presentation/login/login_view.dart';
 import 'package:clean_architecture/presentation/main/main_view.dart';

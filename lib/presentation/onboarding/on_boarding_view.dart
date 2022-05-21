@@ -1,5 +1,5 @@
 import 'package:clean_architecture/app/app_prefs.dart';
-import 'package:clean_architecture/data/di.dart';
+import 'package:clean_architecture/data/locator.dart';
 import 'package:clean_architecture/domain/model/model.dart';
 import 'package:clean_architecture/presentation/onboarding/on_boarding_viewmodel.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';

@@ -1,4 +1,4 @@
-import 'package:clean_architecture/data/di.dart';
+import 'package:clean_architecture/data/locator.dart';
 import 'package:flutter/material.dart';
 
 import 'app/app.dart';

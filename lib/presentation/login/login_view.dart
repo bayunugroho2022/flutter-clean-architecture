@@ -1,5 +1,5 @@
 import 'package:clean_architecture/app/app_prefs.dart';
-import 'package:clean_architecture/data/di.dart';
+import 'package:clean_architecture/data/locator.dart';
 import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
