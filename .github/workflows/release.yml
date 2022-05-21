@@ -39,22 +39,13 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-#          message: |
-#            ${{ github.actor }} created commit
-#
-#            Repository: ${{ github.repository }}
-#
-#            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
           message: |
-            Here is the debug APK for ${{ github.event_name }}
-                        Runner OS: ${{ runner.os }}
-                        Event: ${{ github.event_name }}
-                        Job ID: ${{ github.job }}
-                        Triggered by: ${{ github.actor }}
-                        Branch or TAG: ${{ github.ref }}
-                        Base ref: ${{ github.base_ref }}
-                        Head ref: ${{ github.head_ref }}
-                        Commit SHA: ${{ github.sha }}
-          document: assets/images/splash_logo.png
+            ${{ github.actor }} created commit
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+          photo: assets/images/splash_logo.png
+          document: ${{ github.workspace }}/assets/images/splash_logo.png
 
 
