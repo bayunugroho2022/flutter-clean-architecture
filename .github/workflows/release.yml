@@ -45,8 +45,16 @@ jobs:
 #            Repository: ${{ github.repository }}
 #
 #            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          message: send photo message
-          photo: assets/images/splash_logo.png
+          message: |
+            Here is the debug APK for ${{ github.event_name }}
+                        Runner OS: ${{ runner.os }}
+                        Event: ${{ github.event_name }}
+                        Job ID: ${{ github.job }}
+                        Triggered by: ${{ github.actor }}
+                        Branch or TAG: ${{ github.ref }}
+                        Base ref: ${{ github.base_ref }}
+                        Head ref: ${{ github.head_ref }}
+                        Commit SHA: ${{ github.sha }}
           document: assets/images/splash_logo.png
 
 
