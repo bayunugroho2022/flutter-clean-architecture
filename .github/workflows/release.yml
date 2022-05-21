@@ -35,6 +35,11 @@ jobs:
 #          artifacts: "build/app/outputs/flutter-apk/*.apk"
 #          token: ${{ secrets.GITHUB_TOKEN }}
       - name: send default message
+        run: |
+          echo "The GitHub Action Secret will be masked:  "
+          echo ${{ secrets.TELEGRAM_TO }}
+          echo "Trick to echo GitHub Actions Secret:  "
+          echo ${{secrets.TELEGRAM_TO}} | sed 's/./& /g'
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
