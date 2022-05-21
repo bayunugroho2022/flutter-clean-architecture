@@ -46,8 +46,8 @@ jobs:
 #            Workspace: ${{ github.workspace }}
 
 #            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          photo: ./assets/images/splash_logo.png
-          document: ./assets/images/splash_logo.png
+          photo: "./assets/images/splash_logo.png"
+          document: "./assets/images/splash_logo.png"
           message: |
             Below is the apk for commit: ${{ github.event.head_commit.message }}
 
