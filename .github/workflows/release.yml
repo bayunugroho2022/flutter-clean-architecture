@@ -45,6 +45,7 @@ jobs:
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-          document: app/build/outputs/apk/debug/app-debug.apk
+#          document: app/build/outputs/apk/debug/app-debug.apk
+          document: assets/images/splash_logo.png
 
 
