@@ -39,13 +39,15 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+#          message: |
+#            ${{ github.actor }} created commit
+#
+#            Repository: ${{ github.repository }}
+#            Workspace: ${{ github.workspace }}
+#
+#            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
           message: |
-            ${{ github.actor }} created commit
-
-            Repository: ${{ github.repository }}
-            Workspace: ${{ github.workspace }}
-
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Below is the apk for commit: ${{ github.event.head_commit.message }}
           photo: ${{ github.workspace }}/assets/images/splash_logo.png
           document: ${{ github.workspace }}/assets/images/splash_logo.png
 
