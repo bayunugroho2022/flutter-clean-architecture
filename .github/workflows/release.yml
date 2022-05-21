@@ -46,4 +46,4 @@ jobs:
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
-            document: assets/success.json
+            document: assets/json/success.json
