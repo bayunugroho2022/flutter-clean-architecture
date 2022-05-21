@@ -39,12 +39,12 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          document: assets/json/success.json
           message: |
             ${{ github.actor }} created commit
 
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+          document: assets/images/splash_logo.png
 
 
