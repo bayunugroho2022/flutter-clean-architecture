@@ -46,6 +46,6 @@ jobs:
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
           photo: assets/images/splash_logo.png
-          document: app/build/outputs/apk/debug/app-debug.apk
+          document: build/app/outputs/apk/debug/app-debug.apk
 
 
