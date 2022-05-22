@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:clean_architecture/app/function.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/base/baseviewmodel.dart';
+import 'package:clean_architecture/presentation/common/freezed_data_classes.dart';
 
 class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, RegisterViewModelOutput {
   final StreamController _userNameStreamController = StreamController<String>.broadcast();
@@ -17,6 +18,8 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
   RegisterUseCase _registerUseCase;
 
   RegisterViewModel(this._registerUseCase);
+
+  var registerViewObject = RegisterObject("","","","","","",);
 
   //  -- inputs
   @override
