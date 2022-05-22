@@ -5,6 +5,8 @@ import 'package:clean_architecture/app/function.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/base/baseviewmodel.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_classes.dart';
+import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
+import 'package:clean_architecture/presentation/common/state_renderer/state_renderer.dart';
 
 class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, RegisterViewModelOutput {
   final StreamController _userNameStreamController = StreamController<String>.broadcast();
@@ -19,12 +21,33 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   RegisterViewModel(this._registerUseCase);
 
-  var registerViewObject = RegisterObject("","","","","","",);
+  var registerViewObject = RegisterObject("","","","","","");
 
-  //  -- inputs
   @override
   void start() {
-    // TODO: implement start
+    inputState.add(ContentState());
+  }
+
+
+  @override
+  register() async {
+    inputState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
+    (await _registerUseCase.execute(
+        RegisterUseCaseInput(
+            mobileNumber: registerViewObject.mobileNumber,
+            countryMobileCode: registerViewObject.countryMobileCode,
+            email: registerViewObject.email,
+            userName: registerViewObject.userName,
+            password: registerViewObject.password,
+            profilePicture: registerViewObject.profilePicture,
+        )))
+        .fold(
+            (failure) {
+              inputState.add(
+                  ErrorState(StateRendererType.POPUP_ERROR_STATE, failure.message));
+              }, (data) {
+              inputState.add(ContentState());
+            });
   }
 
   @override
@@ -37,6 +60,15 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
     _profilePictureStreamController.close();
     super.dispose();
   }
+
+
+  @override
+  Sink get inputAllInputValid => _isAllInputsValidStreamController.sink;
+
+  @override
+  Stream<bool> get outputIsAllInputsValid => 
+      _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
+
 
   @override
   Sink get inputEmail => _emailStreamController.sink;
@@ -52,8 +84,6 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   @override
   Sink get inputUserName => _userNameStreamController.sink;
-
-  // -- outputs
 
   @override
   Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream
@@ -93,12 +123,6 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
   Stream<File> get outputIsProfilePictureValid =>
       _profilePictureStreamController.stream.map((file) => file);
 
-  @override
-  register() {
-    // TODO: implement register
-    throw UnimplementedError();
-  }
-
   // -- private methods
   bool _isUserNameValid(String userName) {
     return userName.length >= 8;
@@ -111,10 +135,98 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
   bool _isPasswordValid(String password) {
     return password.length >= 8;
   }
+
+
+
+  @override
+  setCountryCode(String countryCode) {
+    if (countryCode.isNotEmpty) {
+      registerViewObject = registerViewObject.copyWith(countryMobileCode: countryCode);
+    } else {
+      registerViewObject = registerViewObject.copyWith(countryMobileCode: "");
+    }
+    _validate();
+  }
+
+  @override
+  setEmail(String email) {
+    if (isEmailValid(email)) {
+      registerViewObject = registerViewObject.copyWith(mobileNumber: email);
+    } else {
+      registerViewObject = registerViewObject.copyWith(email: "");
+    }
+    _validate();
+  }
+
+  @override
+  setMobileNumber(String mobileNumber) {
+    if (_isMobileNumberValid(mobileNumber)) {
+      registerViewObject = registerViewObject.copyWith(mobileNumber: mobileNumber);
+    } else {
+      registerViewObject = registerViewObject.copyWith(mobileNumber: "");
+    }
+    _validate();
+  }
+
+  @override
+  setPassword(String password) {
+    if (_isPasswordValid(password)) {
+      registerViewObject = registerViewObject.copyWith(password: password);
+    } else {
+      registerViewObject = registerViewObject.copyWith(password: "");
+    }
+    _validate();
+  }
+
+  @override
+  setProfilePicture(File file) {
+    if (file.path.isNotEmpty) {
+      registerViewObject = registerViewObject.copyWith(profilePicture: file.path);
+    } else {
+      registerViewObject = registerViewObject.copyWith(profilePicture: "");
+    }
+    _validate();
+  }
+
+  @override
+  setUserName(String userName) {
+    if (_isUserNameValid(userName)) {
+      registerViewObject = registerViewObject.copyWith(userName: userName);
+    } else {
+      registerViewObject = registerViewObject.copyWith(userName: "");
+    }
+    _validate();
+  }
+
+  bool _validateAllInputs() {
+    return registerViewObject.profilePicture.isNotEmpty &&
+        registerViewObject.email.isNotEmpty &&
+        registerViewObject.password.isNotEmpty &&
+        registerViewObject.mobileNumber.isNotEmpty &&
+        registerViewObject.userName.isNotEmpty &&
+        registerViewObject.countryMobileCode.isNotEmpty;
+  }
+
+  _validate(){
+    inputAllInputValid.add(null);
+  }
+
 }
 
 abstract class RegisterViewModelInput {
   register();
+
+  setUserName(String userName);
+
+  setMobileNumber(String mobileNumber);
+
+  setCountryCode(String countryCode);
+
+  setEmail(String email);
+
+  setPassword(String password);
+
+  setProfilePicture(File file);
 
   Sink get inputUserName;
 
@@ -125,6 +237,8 @@ abstract class RegisterViewModelInput {
   Sink get inputUPassword;
 
   Sink get inputProfilePicture;
+
+  Sink get inputAllInputValid;
 }
 
 abstract class RegisterViewModelOutput {
@@ -145,4 +259,6 @@ abstract class RegisterViewModelOutput {
   Stream<String?> get outputErrorPassword;
 
   Stream<File> get outputIsProfilePictureValid;
+
+  Stream<bool> get outputIsAllInputsValid;
 }
