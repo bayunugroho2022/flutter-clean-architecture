@@ -57,6 +57,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: config safe directory
+        run: git config --add safe.directory ${{ github.workspace }}
+
       - name: Upload to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
