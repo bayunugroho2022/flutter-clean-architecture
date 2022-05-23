@@ -1,5 +1,8 @@
 import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:clean_architecture/presentation/register/register_viewmodel.dart';
+import 'package:clean_architecture/presentation/resources/color_manager.dart';
+import 'package:clean_architecture/presentation/resources/value_manager.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
@@ -52,6 +55,25 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: ColorManager.white,
+      appBar: AppBar(
+        elevation: AppSize.s0,
+        iconTheme: IconThemeData(color: ColorManager.primary),
+        backgroundColor: ColorManager.white,
+      ),
+      body: StreamBuilder<FlowState>(
+        stream: _viewModel.outputState,
+        builder: (context, snapshot) {
+          return snapshot.data?.getScreenWidget(context, _getContentWidget(),() {
+                _viewModel.register();
+              }) ?? _getContentWidget();
+        },
+      ),
+    );
+  }
+
+  Widget _getContentWidget(){
     return Container();
   }
 }
