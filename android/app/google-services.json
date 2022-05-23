@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "621803866262",
+    "project_id": "tes-workflow",
+    "storage_bucket": "tes-workflow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621803866262:android:879dd6146dd79345e81ab7",
+        "android_client_info": {
+          "package_name": "com.example.clean_architecture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621803866262-252d5900ksn6mpgtgknrtg80f63jp8jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXGszW0wToVL9YJaZ0GTQJWOZ1oKGmhZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621803866262-252d5900ksn6mpgtgknrtg80f63jp8jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

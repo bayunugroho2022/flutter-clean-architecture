@@ -21,7 +21,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   RegisterViewModel(this._registerUseCase);
 
-  var registerViewObject = RegisterObject("","","","","","");
+  var registerViewObject = RegisterObject("+62","","","","","");
 
   @override
   void start() {
@@ -120,8 +120,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
       .map((isPasswordValid) => isPasswordValid ? null : "Invalid Password");
 
   @override
-  Stream<File> get outputIsProfilePictureValid =>
-      _profilePictureStreamController.stream.map((file) => file);
+  Stream<File?> get outputProfilePicture => _profilePictureStreamController.stream.map((file) => file);
 
   // -- private methods
   bool _isUserNameValid(String userName) {
@@ -150,8 +149,9 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   @override
   setEmail(String email) {
+    inputEmail.add(email);
     if (isEmailValid(email)) {
-      registerViewObject = registerViewObject.copyWith(mobileNumber: email);
+      registerViewObject = registerViewObject.copyWith(email: email);
     } else {
       registerViewObject = registerViewObject.copyWith(email: "");
     }
@@ -160,6 +160,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   @override
   setMobileNumber(String mobileNumber) {
+    inputMobileNumber.add(mobileNumber);
     if (_isMobileNumberValid(mobileNumber)) {
       registerViewObject = registerViewObject.copyWith(mobileNumber: mobileNumber);
     } else {
@@ -170,6 +171,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   @override
   setPassword(String password) {
+    inputUPassword.add(password);
     if (_isPasswordValid(password)) {
       registerViewObject = registerViewObject.copyWith(password: password);
     } else {
@@ -180,6 +182,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   @override
   setProfilePicture(File file) {
+    inputProfilePicture.add(file);
     if (file.path.isNotEmpty) {
       registerViewObject = registerViewObject.copyWith(profilePicture: file.path);
     } else {
@@ -190,6 +193,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
 
   @override
   setUserName(String userName) {
+    inputUserName.add(userName);
     if (_isUserNameValid(userName)) {
       registerViewObject = registerViewObject.copyWith(userName: userName);
     } else {
@@ -199,12 +203,16 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
   }
 
   bool _validateAllInputs() {
+    print("dsa "+registerViewObject.userName);
+    print("dsa2 "+registerViewObject.email);
+    print("dsa3 "+registerViewObject.password);
+    print("dsa4 "+registerViewObject.mobileNumber);
+
     return registerViewObject.profilePicture.isNotEmpty &&
         registerViewObject.email.isNotEmpty &&
         registerViewObject.password.isNotEmpty &&
         registerViewObject.mobileNumber.isNotEmpty &&
-        registerViewObject.userName.isNotEmpty &&
-        registerViewObject.countryMobileCode.isNotEmpty;
+        registerViewObject.userName.isNotEmpty;
   }
 
   _validate(){
@@ -258,7 +266,7 @@ abstract class RegisterViewModelOutput {
 
   Stream<String?> get outputErrorPassword;
 
-  Stream<File> get outputIsProfilePictureValid;
+  Stream<File?> get outputProfilePicture;
 
   Stream<bool> get outputIsAllInputsValid;
 }
