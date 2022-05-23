@@ -3,17 +3,19 @@ import 'package:clean_architecture/data/repository/repository_impl.dart';
 import 'package:clean_architecture/domain/repository/repository.dart';
 import 'package:clean_architecture/domain/usecase/forgot_password_usecase.dart';
 import 'package:clean_architecture/domain/usecase/login_usecase.dart';
+import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/forgot_password/forgot_password_viewmodel.dart';
 import 'package:clean_architecture/presentation/login/login_viewmodel.dart';
+import 'package:clean_architecture/presentation/register/register_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data_source/remote_data_source.dart';
-import 'data_source/remote_data_source_impl.dart';
-import 'network/app_api.dart';
-import 'network/dio_factory.dart';
-import 'network/network_info.dart';
+import '../data/data_source/remote_data_source.dart';
+import '../data/data_source/remote_data_source_impl.dart';
+import '../data/network/app_api.dart';
+import '../data/network/dio_factory.dart';
+import '../data/network/network_info.dart';
 
 
 final instance = GetIt.instance;
@@ -53,7 +55,16 @@ initLoginModule() {
 }
 initForgotPasswordModule() {
   if (!GetIt.I.isRegistered<ForgotPasswordUseCase>()) {
-    instance.registerFactory<ForgotPasswordUseCase>(() => ForgotPasswordUseCase(instance()));
-    instance.registerFactory<ForgotPasswordViewModel>(() => ForgotPasswordViewModel(instance()));
+    instance.registerFactory<ForgotPasswordUseCase>(() =>
+        ForgotPasswordUseCase(instance()));
+    instance.registerFactory<ForgotPasswordViewModel>(() =>
+        ForgotPasswordViewModel(instance()));
+  }
+}
+
+initRegisterModule() {
+  if (!GetIt.I.isRegistered<RegisterUseCase>()) {
+    instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+    instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
   }
 }
