@@ -52,13 +52,13 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: config safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/checkout@v3.0.1
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      - name: config safe directory
-        run: git config --global --add safe.directory /github/workspace
 
       - name: Upload to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
