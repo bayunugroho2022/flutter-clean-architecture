@@ -10,7 +10,7 @@ const ZERO = 0;
 extension CustomerResponseMapper on Customer{
   CustomerModel toDomain(){
     return CustomerModel(
-      this.id?.orEmpty() ?? EMPTY,
+      this.id?.orEmpty() ?? EMPTY ,
       this.name?.orEmpty() ?? EMPTY,
       this.numOfNotifications?.orZero() ?? ZERO,
     );

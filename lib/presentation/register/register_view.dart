@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:clean_architecture/app/app_prefs.dart';
 import 'package:clean_architecture/app/locator.dart';
 import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:clean_architecture/presentation/register/register_viewmodel.dart';
@@ -9,6 +10,7 @@ import 'package:clean_architecture/presentation/resources/routes_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/value_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,6 +24,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   final _viewModel = instance <RegisterViewModel>();
   final picker = instance<ImagePicker>();
+  final _appPreferences = instance<AppPreferences>();
   final _formKey = GlobalKey<FormState>();
 
   final _userNameTextEditingController = TextEditingController();
@@ -59,6 +62,14 @@ class _RegisterViewState extends State<RegisterView> {
       _viewModel.setMobileNumber(_mobileNumberTextEditingController.text);
     });
 
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream
+        .listen((isSuccessLoggedIn) {
+      // navigate to main screen
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        _appPreferences.setIsUserLoggedIn();
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
+    });
   }
 
   @override

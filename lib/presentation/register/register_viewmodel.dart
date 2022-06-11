@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:clean_architecture/app/app_prefs.dart';
 import 'package:clean_architecture/app/function.dart';
+import 'package:clean_architecture/app/locator.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/base/baseviewmodel.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_classes.dart';
@@ -15,7 +17,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
   final StreamController _passwordStreamController = StreamController<String>.broadcast();
   final StreamController _profilePictureStreamController = StreamController<File>.broadcast();
   final StreamController _isAllInputsValidStreamController = StreamController<void>.broadcast();
-
+  final StreamController isUserLoggedInSuccessfullyStreamController = StreamController<bool>();
 
   RegisterUseCase _registerUseCase;
 
@@ -47,6 +49,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
                   ErrorState(StateRendererType.POPUP_ERROR_STATE, failure.message));
               }, (data) {
               inputState.add(ContentState());
+              isUserLoggedInSuccessfullyStreamController.add(true);
             });
   }
 
@@ -58,6 +61,7 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
     _emailStreamController.close();
     _passwordStreamController.close();
     _profilePictureStreamController.close();
+    isUserLoggedInSuccessfullyStreamController.close();
     super.dispose();
   }
 
@@ -203,11 +207,6 @@ class RegisterViewModel extends BaseViewModel with RegisterViewModelInput, Regis
   }
 
   bool _validateAllInputs() {
-    print("dsa "+registerViewObject.userName);
-    print("dsa2 "+registerViewObject.email);
-    print("dsa3 "+registerViewObject.password);
-    print("dsa4 "+registerViewObject.mobileNumber);
-
     return registerViewObject.profilePicture.isNotEmpty &&
         registerViewObject.email.isNotEmpty &&
         registerViewObject.password.isNotEmpty &&
