@@ -14,7 +14,8 @@ class RepositoryImpl extends Repository {
   final LocalDataSource _localDataSource;
   final NetworkInfo _networkInfo;
 
-  RepositoryImpl(this._remoteDataSource, this._networkInfo,  this._localDataSource);
+  RepositoryImpl(
+      this._remoteDataSource, this._networkInfo, this._localDataSource);
 
   @override
   Future<Either<Failure, Authentication>> login(
@@ -82,13 +83,10 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<Either<Failure, HomeObject>> getHome() async {
-
-    try{
-      //get from cache
+    try {
       final response = await _localDataSource.getHome();
       return Right(response.toDomain());
-
-    }catch(e){
+    } catch (e) {
       if (await _networkInfo.isConnected) {
         try {
           final response = await _remoteDataSource.getHome();
