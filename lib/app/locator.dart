@@ -1,4 +1,6 @@
 import 'package:clean_architecture/app/app_prefs.dart';
+import 'package:clean_architecture/data/data_source/local_data_source.dart';
+import 'package:clean_architecture/data/data_source/local_data_source_impl.dart';
 import 'package:clean_architecture/data/repository/repository_impl.dart';
 import 'package:clean_architecture/domain/repository/repository.dart';
 import 'package:clean_architecture/domain/usecase/forgot_password_usecase.dart';
@@ -45,8 +47,11 @@ Future<void> initAppModule() async {
   // remote data source
   instance.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImplementer(instance()));
 
+  // local data source
+  instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImplementer());
+
   // repository
-  instance.registerLazySingleton<Repository>(() => RepositoryImpl(instance(), instance()));
+  instance.registerLazySingleton<Repository>(() => RepositoryImpl(instance(), instance(), instance()));
 
 }
 
@@ -56,6 +61,7 @@ initLoginModule() {
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
   }
 }
+
 initForgotPasswordModule() {
   if (!GetIt.I.isRegistered<ForgotPasswordUseCase>()) {
     instance.registerFactory<ForgotPasswordUseCase>(() =>

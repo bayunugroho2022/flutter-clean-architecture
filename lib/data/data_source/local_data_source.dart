@@ -5,4 +5,7 @@ abstract class LocalDataSource {
 
   Future<void> saveHomeToCache(ResponseHome responseHome);
 
+  void clearCache();
+
+  void removeFromCache(String key);
 }
