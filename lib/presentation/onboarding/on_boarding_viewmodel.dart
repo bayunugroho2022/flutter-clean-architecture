@@ -5,8 +5,7 @@ import 'package:clean_architecture/presentation/base/baseviewmodel.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 
-class OnBoardingViewModel extends BaseViewModel
-    with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
+class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   int _currentIndex = 0;
   late final List<SliderObject> _list;
   final StreamController _streamController =

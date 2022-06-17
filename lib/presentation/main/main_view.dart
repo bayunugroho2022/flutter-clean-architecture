@@ -1,5 +1,5 @@
 
-import 'package:clean_architecture/presentation/main/home_view.dart';
+import 'package:clean_architecture/presentation/main/home/home_view.dart';
 import 'package:clean_architecture/presentation/main/notification_view.dart';
 import 'package:clean_architecture/presentation/main/search_view.dart';
 import 'package:clean_architecture/presentation/main/setting_view.dart';

@@ -19,13 +19,12 @@ class AppServicesClient {
     return response.data;
   }
 
-  Future<dynamic> get({String? url, Map<String, dynamic>? requestBody}) async {
+  Future<dynamic> get({String? endPoint}) async {
     Response response;
-    String getUrl = getBaseUrl(url!);
-    response = await dio.post(getUrl,
-        data: jsonEncode(requestBody),
+    String getUrl = getBaseUrl(endPoint!);
+    response = await dio.get(getUrl,
         options: Options(headers: getHeader()));
-    return response;
+    return response.data;
   }
 
 
