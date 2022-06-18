@@ -57,6 +57,6 @@ class RemoteDataSourceImplementer implements RemoteDataSource {
   @override
   Future<ResponseStoreDetail> getStoreDetail(int id) async{
     final response =  await _appServicesClient!.get(endPoint: "${EndPoint.storeDetail}/$id");
-    return ResponseStoreDetail.fromJson(response);
+    return ResponseStoreDetail.fromJson(json.decode(response));
   }
 }

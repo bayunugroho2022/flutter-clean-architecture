@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/data/data_source/remote_data_source.dart';
 import 'package:clean_architecture/data/network/error_handler.dart';
@@ -110,22 +112,30 @@ class RepositoryImpl extends Repository {
   Future<Either<Failure, StoreDetailModel>> getStoreDetail(int id) async{
     try {
       final response = await _localDataSource.getStoreDetails(id);
+      print('tes1');
       return Right(response.toDomain());
     } catch (e) {
       if (await _networkInfo.isConnected) {
         try {
           final response = await _remoteDataSource.getStoreDetail(id);
           if (response.status == ApiInternalStatus.SUCCESS) {
+            print('tes2');
             _localDataSource.saveStoreDetailsToCache(response);
             return Right(response.toDomain());
           } else {
+            print('tes3');
+
             return Left(Failure(response.status ?? ApiInternalStatus.FAILURE,
                 response.message ?? ResponseMessage.DEFAULT));
           }
         } catch (error) {
+          print('tes4');
+          print('$error');
           return (Left(ErrorHandler.handle(error).failure));
         }
       } else {
+        print('tes5');
+
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
     }
