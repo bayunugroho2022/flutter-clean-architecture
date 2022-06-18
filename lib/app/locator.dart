@@ -7,10 +7,12 @@ import 'package:clean_architecture/domain/usecase/forgot_password_usecase.dart';
 import 'package:clean_architecture/domain/usecase/home_usecase.dart';
 import 'package:clean_architecture/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
+import 'package:clean_architecture/domain/usecase/store_detail_usecase.dart';
 import 'package:clean_architecture/presentation/forgot_password/forgot_password_viewmodel.dart';
 import 'package:clean_architecture/presentation/login/login_viewmodel.dart';
 import 'package:clean_architecture/presentation/main/home/home_viewmodel.dart';
 import 'package:clean_architecture/presentation/register/register_viewmodel.dart';
+import 'package:clean_architecture/presentation/store_detail/store_detail_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -83,5 +85,12 @@ initHomeModule() {
   if (!GetIt.I.isRegistered<HomeUseCase>()) {
     instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
     instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
+  }
+}
+
+initStoreDetailsModule(){
+  if (!GetIt.I.isRegistered<StoreDetailUseCase>()) {
+    instance.registerFactory<StoreDetailUseCase>(() => StoreDetailUseCase(instance()));
+    instance.registerFactory<StoreDetailsViewModel>(() => StoreDetailsViewModel(instance()));
   }
 }

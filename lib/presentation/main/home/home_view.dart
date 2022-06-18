@@ -2,6 +2,8 @@ import 'package:clean_architecture/app/locator.dart';
 import 'package:clean_architecture/domain/model/model.dart';
 import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:clean_architecture/presentation/main/home/home_viewmodel.dart';
+import 'package:clean_architecture/presentation/resources/color_manager.dart';
+import 'package:clean_architecture/presentation/resources/routes_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/value_manager.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +76,17 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _getStores(List<StoreModel>? stores) {
-    return Text('${stores?.length}');
+    return InkWell(
+      onTap: (){
+        Navigator.pushNamed(context, Routes.storeDetailsRoute, arguments: {'id': 1});
+      },
+      child: Container(
+        height: 100,
+        width: 100,
+        color: ColorManager.error,
+        child: const Text('go to detail'),
+      ),
+    );
   }
 
   Widget _getSection(String title) {

@@ -62,7 +62,7 @@ class StoreModel {
   StoreModel(this.id, this.title, this.image);
 }
 
-class HomeData{
+class HomeData {
   List<ServiceModel>? services;
   List<StoreModel>? stores;
   List<BannerModel>? banners;
@@ -70,10 +70,22 @@ class HomeData{
   HomeData(this.services, this.stores, this.banners);
 }
 
-class HomeObject{
+class HomeObject {
   HomeData? homeData;
 
   HomeObject(this.homeData);
+}
+
+class StoreDetailModel {
+  int? id;
+  String? image;
+  String? title;
+  String? details;
+  String? services;
+  String? about;
+
+  StoreDetailModel(
+      {this.id, this.image, this.title, this.details, this.services, this.about});
 }
 
 class CachedItem {

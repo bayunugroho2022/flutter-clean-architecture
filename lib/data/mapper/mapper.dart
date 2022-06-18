@@ -2,6 +2,7 @@ import 'package:clean_architecture/app/extentions.dart';
 import 'package:clean_architecture/data/responses/response_forgot_password.dart';
 import 'package:clean_architecture/data/responses/response_home.dart';
 import 'package:clean_architecture/data/responses/response_login.dart';
+import 'package:clean_architecture/data/responses/response_store_detail.dart';
 import 'package:clean_architecture/domain/model/model.dart';
 
 const EMPTY = "";
@@ -59,6 +60,19 @@ extension BannerResponseMapper on Banners {
       title?.orEmpty() ?? EMPTY,
       image?.orEmpty() ?? EMPTY,
       link?.orEmpty() ?? EMPTY,
+    );
+  }
+}
+
+extension StoreDetailResponseMapper on ResponseStoreDetail {
+  StoreDetailModel toDomain() {
+    return StoreDetailModel(
+      about: about?.orEmpty() ?? EMPTY,
+      details: details?.orEmpty() ?? EMPTY,
+      image: image?.orEmpty() ?? EMPTY,
+      id: id!.orZero(),
+      services: services?.orEmpty() ?? EMPTY,
+      title: title?.orEmpty() ?? EMPTY,
     );
   }
 }

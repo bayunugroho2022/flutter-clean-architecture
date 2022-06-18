@@ -7,6 +7,7 @@ import 'package:clean_architecture/data/requests/request.dart';
 import 'package:clean_architecture/data/responses/response_forgot_password.dart';
 import 'package:clean_architecture/data/responses/response_home.dart';
 import 'package:clean_architecture/data/responses/response_login.dart';
+import 'package:clean_architecture/data/responses/response_store_detail.dart';
 
 class RemoteDataSourceImplementer implements RemoteDataSource {
   final AppServicesClient? _appServicesClient;
@@ -51,5 +52,11 @@ class RemoteDataSourceImplementer implements RemoteDataSource {
   Future<ResponseHome> getHome() async {
     final response =  await _appServicesClient!.get(endPoint: EndPoint.home);
     return ResponseHome.fromJson(response);
+  }
+
+  @override
+  Future<ResponseStoreDetail> getStoreDetail(int id) async{
+    final response =  await _appServicesClient!.get(endPoint: "${EndPoint.storeDetail}/$id");
+    return ResponseStoreDetail.fromJson(response);
   }
 }
