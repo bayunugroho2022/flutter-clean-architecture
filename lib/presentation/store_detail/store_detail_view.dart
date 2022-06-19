@@ -91,7 +91,7 @@ class _StoreDetailViewState extends State<StoreDetailView> {
               fit: BoxFit.cover,
               width: double.infinity,
               progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  Container(
+                  SizedBox(
                       width: 100,
                       height: 100,
                       child: Center(child: CircularProgressIndicator(value: downloadProgress.progress))),
