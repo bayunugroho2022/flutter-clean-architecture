@@ -1,6 +1,10 @@
 
 
+import 'package:clean_architecture/app/app_prefs.dart';
+import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
+import 'package:clean_architecture/presentation/resources/routes_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/value_manager.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +18,9 @@ class SettingView extends StatefulWidget {
 }
 
 class SettingViewState extends State<SettingView> {
+  final _appPreferences = instance<AppPreferences>();
+  final _localDataSource = instance<LocalDataSource>();
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -26,7 +33,9 @@ class SettingViewState extends State<SettingView> {
           ),
           leading: SvgPicture.asset(ImageAssets.changeLangIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {},
+          onTap: () {
+            _changeLanguage();
+          },
         ),
         ListTile(
           title: Text(
@@ -35,7 +44,9 @@ class SettingViewState extends State<SettingView> {
           ),
           leading: SvgPicture.asset(ImageAssets.contactUsIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {},
+          onTap: () {
+            _contactUs();
+          },
         ),
         ListTile(
           title: Text(
@@ -44,7 +55,9 @@ class SettingViewState extends State<SettingView> {
           ),
           leading: SvgPicture.asset(ImageAssets.inviteFriendsIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {},
+          onTap: () {
+            _inviteFriends();
+          },
         ),
         ListTile(
           title: Text(
@@ -53,9 +66,23 @@ class SettingViewState extends State<SettingView> {
           ),
           leading: SvgPicture.asset(ImageAssets.logoutIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {},
+          onTap: () {
+            _logout();
+          },
         )
       ],
     );
+  }
+
+  void _changeLanguage() {}
+
+  void _contactUs() {}
+
+  void _inviteFriends() {}
+
+  void _logout() {
+    _appPreferences.logout();
+    _localDataSource.clearCache();
+    Navigator.pushReplacementNamed(context, Routes.loginRoute);
   }
 }
