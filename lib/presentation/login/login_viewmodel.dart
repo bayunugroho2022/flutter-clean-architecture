@@ -6,15 +6,14 @@ import 'package:clean_architecture/presentation/common/freezed_data_classes.dart
 import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:clean_architecture/presentation/common/state_renderer/state_renderer.dart';
 
-class LoginViewModel extends BaseViewModel
-    with LoginViewModelInput, LoginViewModelOutputs {
+class LoginViewModel extends BaseViewModel with LoginViewModelInput, LoginViewModelOutputs {
   final _userNameStreamController = StreamController<String>.broadcast();
   final _passwordStreamController = StreamController<String>.broadcast();
   final _isAllInputsValidStreamController = StreamController<void>.broadcast();
-  final isUserLoggedInSuccessfully = StreamController<bool>();
+  final isUserLoggedInSuccessfully = StreamController<String>();
   var loginObject = LoginObject("", "");
 
-  LoginUseCase _loginUseCase;
+  final LoginUseCase _loginUseCase;
 
   LoginViewModel(this._loginUseCase);
 
@@ -42,21 +41,14 @@ class LoginViewModel extends BaseViewModel
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _loginUseCase.execute(
-        LoginUseCaseInput(loginObject.userName, loginObject.password)))
-        .fold(
-            (failure)
-        {
-          // left -> failure
-          inputState.add(ErrorState(
-              StateRendererType.POPUP_ERROR_STATE, failure.message));
-    },
-            (data) {
-          // right -> success (data)
-          inputState.add(ContentState());
-
-          // navigate to main screen after the login
-          isUserLoggedInSuccessfully.add(true);
-        });
+            LoginUseCaseInput(loginObject.userName, loginObject.password)))
+        .fold((failure) {
+      inputState.add(
+          ErrorState(StateRendererType.POPUP_ERROR_STATE, failure.message));
+    }, (data) {
+      inputState.add(ContentState());
+      isUserLoggedInSuccessfully.add("success");
+    });
   }
 
   @override
@@ -102,7 +94,8 @@ class LoginViewModel extends BaseViewModel
   Sink get inputIsAllInputValid => _isAllInputsValidStreamController.sink;
 
   @override
-  Stream<bool> get outputIsAllInputsValid => _isAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
+  Stream<bool> get outputIsAllInputsValid =>
+      _isAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
 }
 
 abstract class LoginViewModelInput {
