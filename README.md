@@ -20,42 +20,42 @@
 - Network ( http implementer, interceptor, error handler )
 
 ## Domain Layer
-- model
-- repository
-- usecase
+- Model
+- Repository
+- Usecase
 - Either concept (Left(Failure) and right(Success))
 
 ## Presentation Layer(MVVM)
-- model
-- view
-- viewmodel
-- usecase rule to connect to outside world
-- creating data class similiar to data class in kotlin 
+- Model
+- View
+- Viewmodel
+- Usecase rule to connect to outside world
+- Creating data class similiar to data class in kotlin 
 
 ## Presentation Layer(UI)
-- login screen
-- register screen
+- Login screen
+- Register screen
 - ... screen
 
 ## Presentation Layer (State Renderer)
 - Full Screen error state
 - Full Screen loading state
-- popup loading state
-- popup error state
-- empty state (no data)
+- Popup loading state
+- Popup error state
+- Empty state (no data)
 
 ## Presentation Layer (Resources)
 - Color manager
-- route manager
-- asset manager
-- font manager
+- Route manager
+- Asset manager
+- Font manager
 - language manager
-- routes manager
-- string manager
-- style manager
-- theme manager
-- value manager
+- Loutes manager
+- String manager
+- Style manager
+- Theme manager
+- Value manager
 
 # Workflow
 - Build flutter app
-- send notification and app to telegram when app success build  
+- Send notification and app to telegram when app success build  
