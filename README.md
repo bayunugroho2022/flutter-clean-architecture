@@ -56,3 +56,6 @@
 - theme manager
 - value manager
 
+# Workflow
+- Build flutter app
+- send notification and app to telegram when app success build  
