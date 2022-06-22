@@ -1,16 +1,58 @@
-# clean_architecture
+# Flutter clean architecture with MVVM
 
-A new Flutter project.
+## Screenshoot 
+--
 
-## Getting Started
+## Application Layer
+- Application class
+- Dependency injection
+- Application Route manager ( Navigation Manager )
+- Application preference ( Shared preference to save data to local storage )
+- Extentions
+- Shared Function
 
-This project is a starting point for a Flutter application.
+## Data Layer
+- Data source (remote, local)
+- Mapper
+- Repository
+- Request
+- Resposnse
+- Network ( http implementer, interceptor, error handler )
 
-A few resources to get you started if this is your first Flutter project:
+## Domain Layer
+- model
+- repository
+- usecase
+- Either concept (Left(Failure) and right(Success))
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Presentation Layer(MVVM)
+- model
+- view
+- viewmodel
+- usecase rule to connect to outside world
+- creating data class similiar to data class in kotlin 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Presentation Layer(UI)
+- login screen
+- register screen
+- ... screen
+
+## Presentation Layer (State Renderer)
+- Full Screen error state
+- Full Screen loading state
+- popup loading state
+- popup error state
+- empty state (no data)
+
+## Presentation Layer (Resources)
+- Color manager
+- route manager
+- asset manager
+- font manager
+- language manager
+- routes manager
+- string manager
+- style manager
+- theme manager
+- value manager
+
