@@ -49,8 +49,8 @@
 - Route manager
 - Asset manager
 - Font manager
-- language manager
-- Loutes manager
+- Language manager
+- Routes manager
 - String manager
 - Style manager
 - Theme manager
