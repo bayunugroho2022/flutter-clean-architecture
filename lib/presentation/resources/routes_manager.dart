@@ -1,13 +1,14 @@
-import 'package:clean_architecture/app/locator.dart';
-import 'package:clean_architecture/presentation/forgot_password/forgot_password_view.dart';
-import 'package:clean_architecture/presentation/login/login_view.dart';
+import 'package:clean_architecture/injection.dart';
 import 'package:clean_architecture/presentation/main/main_view.dart';
-import 'package:clean_architecture/presentation/onboarding/on_boarding_view.dart';
-import 'package:clean_architecture/presentation/register/register_view.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
-import 'package:clean_architecture/presentation/splash/splash_view.dart';
-import 'package:clean_architecture/presentation/store_detail/store_detail_view.dart';
 import 'package:flutter/material.dart';
+
+import '../mvvm/forgot_password/forgot_password_view.dart';
+import '../mvvm/login/login_view.dart';
+import '../mvvm/onboarding/on_boarding_view.dart';
+import '../mvvm/register/register_view.dart';
+import '../mvvm/splash/splash_view.dart';
+import '../mvvm/store_detail/store_detail_view.dart';
 
 class Routes {
   static const String splashRoute = "/";

@@ -1,7 +1,6 @@
 import 'package:clean_architecture/app/app_prefs.dart';
-import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/injection.dart';
 import 'package:clean_architecture/domain/model/model.dart';
-import 'package:clean_architecture/presentation/onboarding/on_boarding_viewmodel.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/routes_manager.dart';
@@ -11,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'on_boarding_viewmodel.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);

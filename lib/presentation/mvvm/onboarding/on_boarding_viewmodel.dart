@@ -8,8 +8,7 @@ import 'package:clean_architecture/presentation/resources/string_manager.dart';
 class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   int _currentIndex = 0;
   late final List<SliderObject> _list;
-  final StreamController _streamController =
-      StreamController<SlideViewObject>();
+  final StreamController _streamController = StreamController<SlideViewObject>();
 
   @override
   void dispose() {

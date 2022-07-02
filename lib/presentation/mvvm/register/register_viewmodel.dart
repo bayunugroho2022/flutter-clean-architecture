@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:clean_architecture/app/app_prefs.dart';
 import 'package:clean_architecture/app/function.dart';
-import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/injection.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/presentation/base/baseviewmodel.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_classes.dart';

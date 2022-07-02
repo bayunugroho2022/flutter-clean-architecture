@@ -1,12 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/injection.dart';
 import 'package:clean_architecture/domain/model/model.dart';
+import 'package:clean_architecture/presentation/common/cache_image_network.dart';
 import 'package:clean_architecture/presentation/common/state_renderer/state_render_impl.dart';
+import 'package:clean_architecture/presentation/mvvm/store_detail/store_detail_viewmodel.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/string_manager.dart';
 import 'package:clean_architecture/presentation/resources/value_manager.dart';
-import 'package:clean_architecture/presentation/store_detail/store_detail_viewmodel.dart';
 import 'package:flutter/material.dart';
+
 
 class StoreDetailView extends StatefulWidget {
   const StoreDetailView({Key? key}) : super(key: key);
@@ -38,16 +39,18 @@ class _StoreDetailViewState extends State<StoreDetailView> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: StreamBuilder<FlowState>(
-          stream: _viewModel.outputState,
-          builder: (context, snapshot) {
-            return Scaffold(
-              body: snapshot.data?.getScreenWidget(context, _getContentWidget(), () {
-                _viewModel.start();
-              }) ?? Container(),
-            );
-          },
-        ));
+      stream: _viewModel.outputState,
+      builder: (context, snapshot) {
+        return Scaffold(
+          body: snapshot.data?.getScreenWidget(context, _getContentWidget(), () {
+                    _viewModel.start();
+                  }) ??
+                  Container(),
+        );
+      },
+    ));
   }
+
   Widget _getContentWidget() {
     return Scaffold(
         backgroundColor: ColorManager.white,
@@ -62,15 +65,15 @@ class _StoreDetailViewState extends State<StoreDetailView> {
           centerTitle: true,
         ),
         body: Container(
-          constraints: BoxConstraints.expand(),
+          constraints: const BoxConstraints.expand(),
           color: ColorManager.white,
           child: SingleChildScrollView(
             child: StreamBuilder<StoreDetailModel>(
               stream: _viewModel.outputStoreDetails,
               builder: (context, snapshot) {
-                if(snapshot.hasData){
+                if (snapshot.hasData) {
                   return _getItems(snapshot.data);
-                }else{
+                } else {
                   return Container();
                 }
               },
@@ -85,18 +88,10 @@ class _StoreDetailViewState extends State<StoreDetailView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: CachedNetworkImage(
-              imageUrl: storeDetails.image!,
-              height: 250,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Center(child: CircularProgressIndicator(value: downloadProgress.progress))),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
+            child: getCacheImageNetwork(
+                height: 250,
+                width: double.infinity,
+                image: storeDetails.image!),
           ),
           _getSection(AppStrings.details),
           _getInfoText(storeDetails.details!),

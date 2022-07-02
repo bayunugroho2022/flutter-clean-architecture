@@ -4,6 +4,9 @@ class ColorManager {
   static Color primary = HexColor.fromHex("#ED9728");
   static Color darkGrey = HexColor.fromHex("#525252");
   static Color grey = HexColor.fromHex("#737477");
+  static Color red = HexColor.fromHex("#fc0303");
+  static Color purple = HexColor.fromHex("#8000ff");
+  static Color green = HexColor.fromHex("#00b318");
   static Color lightGrey = HexColor.fromHex("#9E9E9E");
   static Color primaryOpacity70 = HexColor.fromHex("#B3ED9728");
 

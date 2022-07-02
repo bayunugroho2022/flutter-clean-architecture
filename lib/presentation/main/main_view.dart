@@ -37,8 +37,6 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_title,),),
       body: views[_currentIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

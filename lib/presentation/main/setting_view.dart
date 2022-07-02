@@ -1,7 +1,7 @@
 
 
 import 'package:clean_architecture/app/app_prefs.dart';
-import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/injection.dart';
 import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture/presentation/resources/routes_manager.dart';
@@ -23,54 +23,56 @@ class SettingViewState extends State<SettingView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(AppPadding.p8),
-      children: [
-        ListTile(
-          title: Text(
-            AppStrings.changeLanguage,
-            style: Theme.of(context).textTheme.headline4,
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.all(AppPadding.p8),
+        children: [
+          ListTile(
+            title: Text(
+              AppStrings.changeLanguage,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            leading: SvgPicture.asset(ImageAssets.changeLangIc),
+            trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
+            onTap: () {
+              _changeLanguage();
+            },
           ),
-          leading: SvgPicture.asset(ImageAssets.changeLangIc),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {
-            _changeLanguage();
-          },
-        ),
-        ListTile(
-          title: Text(
-            AppStrings.contactUs,
-            style: Theme.of(context).textTheme.headline4,
+          ListTile(
+            title: Text(
+              AppStrings.contactUs,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            leading: SvgPicture.asset(ImageAssets.contactUsIc),
+            trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
+            onTap: () {
+              _contactUs();
+            },
           ),
-          leading: SvgPicture.asset(ImageAssets.contactUsIc),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {
-            _contactUs();
-          },
-        ),
-        ListTile(
-          title: Text(
-            AppStrings.inviteYourFriends,
-            style: Theme.of(context).textTheme.headline4,
+          ListTile(
+            title: Text(
+              AppStrings.inviteYourFriends,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            leading: SvgPicture.asset(ImageAssets.inviteFriendsIc),
+            trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
+            onTap: () {
+              _inviteFriends();
+            },
           ),
-          leading: SvgPicture.asset(ImageAssets.inviteFriendsIc),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {
-            _inviteFriends();
-          },
-        ),
-        ListTile(
-          title: Text(
-            AppStrings.logout,
-            style: Theme.of(context).textTheme.headline4,
-          ),
-          leading: SvgPicture.asset(ImageAssets.logoutIc),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
-          onTap: () {
-            _logout();
-          },
-        )
-      ],
+          ListTile(
+            title: Text(
+              AppStrings.logout,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            leading: SvgPicture.asset(ImageAssets.logoutIc),
+            trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
+            onTap: () {
+              _logout();
+            },
+          )
+        ],
+      ),
     );
   }
 

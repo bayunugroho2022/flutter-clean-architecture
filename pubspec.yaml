@@ -49,6 +49,8 @@ dependencies:
   image_picker: ^0.8.5+3
   rxdart: ^0.27.4
   cached_network_image: ^3.2.0
+  carousel_slider: ^4.1.1
+  google_nav_bar: ^5.0.6
 
 
 dev_dependencies:
@@ -96,17 +98,9 @@ flutter:
     - assets/json/
 
   fonts:
-    - family: Montserrat
+    - family: FSAldrin
       fonts:
-        - asset: assets/fonts/Montserrat-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Montserrat-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Montserrat-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Montserrat-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Montserrat-Light.ttf
-          weight: 300
+        - asset: assets/fonts/FSAldrin.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

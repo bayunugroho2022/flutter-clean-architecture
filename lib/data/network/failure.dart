@@ -1,5 +1,3 @@
-
-
 import 'package:clean_architecture/data/network/error_handler.dart';
 
 class Failure{

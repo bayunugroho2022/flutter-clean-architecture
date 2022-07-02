@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:clean_architecture/app/app_prefs.dart';
-import 'package:clean_architecture/app/locator.dart';
+import 'package:clean_architecture/injection.dart';
 import 'package:clean_architecture/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/routes_manager.dart';

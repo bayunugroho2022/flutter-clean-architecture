@@ -8,21 +8,21 @@ import 'package:clean_architecture/domain/usecase/home_usecase.dart';
 import 'package:clean_architecture/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture/domain/usecase/register_usecase.dart';
 import 'package:clean_architecture/domain/usecase/store_detail_usecase.dart';
-import 'package:clean_architecture/presentation/forgot_password/forgot_password_viewmodel.dart';
-import 'package:clean_architecture/presentation/login/login_viewmodel.dart';
 import 'package:clean_architecture/presentation/main/home/home_viewmodel.dart';
-import 'package:clean_architecture/presentation/register/register_viewmodel.dart';
-import 'package:clean_architecture/presentation/store_detail/store_detail_viewmodel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/data_source/remote_data_source.dart';
-import '../data/data_source/remote_data_source_impl.dart';
-import '../data/network/app_api.dart';
-import '../data/network/dio_factory.dart';
-import '../data/network/network_info.dart';
+import 'data/data_source/remote_data_source.dart';
+import 'data/data_source/remote_data_source_impl.dart';
+import 'data/network/app_api.dart';
+import 'data/network/dio_factory.dart';
+import 'data/network/network_info.dart';
+import 'presentation/mvvm/forgot_password/forgot_password_viewmodel.dart';
+import 'presentation/mvvm/login/login_viewmodel.dart';
+import 'presentation/mvvm/register/register_viewmodel.dart';
+import 'presentation/mvvm/store_detail/store_detail_viewmodel.dart';
 
 
 final instance = GetIt.instance;
